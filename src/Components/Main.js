@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
+import Recipe from './Recipe'
 import '../Styles/Main.css'
 
 class Main extends Component {
   handleClick(e) {
     e.preventDefault()
-    this.props.addRecipe('pb&j', ['bread', 'peanut butter', 'jelly'])
+    this.props.addRecipe('nachos', ['chips', 'cheese'])
   }
 
   render() {
-    console.log(this.props);
+    let recipes = this.props.recipes.recipes
     return (
       <div className="Main">
         Recipe Box
-        <button onClick={this.handleClick.bind(this)}>Add Recipe</button>
+        { recipes.map((recipe, index) => <Recipe
+          key={index}
+          index={index}
+          recipe={recipes[index]}
+          removeRecipe={this.props.removeRecipe} />) }
+        <button onClick={this.handleClick.bind(this) }>Add Recipe</button>      
       </div>
     );
   }

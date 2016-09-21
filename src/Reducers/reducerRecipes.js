@@ -1,12 +1,14 @@
 const recipes = (state = [], action) => {
-  console.log('recipes reducer fired');
   switch (action.type) {
     case 'ADD_RECIPE':
       return [...state, {
-        id: action.id,
         recipe: action.recipe,
         ingredients: action.ingredients
       }]
+    case 'REMOVE_RECIPE':
+      return [
+        ...state.slice(0, action.index),
+        ...state.slice(action.index + 1)]
     default:
       return state
   }
